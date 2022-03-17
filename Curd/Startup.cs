@@ -1,3 +1,5 @@
+using Curd.RepositryLayer;
+using Curd.ServiceLayer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -26,6 +28,11 @@ namespace Curd
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddScoped<ICurdOprationSL, CurdOprationSL>();
+            services.AddScoped<ICurdOprationRL, CurdOprationRL>();
+            services.AddSwaggerGen();
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -46,6 +53,15 @@ namespace Curd
             {
                 endpoints.MapControllers();
             });
+            app.UseSwagger();
+
+
+            app.UseSwaggerUI(options =>
+            {
+                options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
+                
+            });
         }
+
     }
 }

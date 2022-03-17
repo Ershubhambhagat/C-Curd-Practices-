@@ -1,14 +1,20 @@
 ﻿using Curd.CommonLayer.Model;
+using Curd.RepositryLayer;
 using System.Threading.Tasks;
 
 namespace Curd.ServiceLayer
 {
     public class CurdOprationSL:ICurdOprationSL
     {
-       
-        public Task<CreateReacordReasponce> CreateRecord(CreateRecordRequest request)
+        public readonly ICurdOprationRL _curdOprationRL;
+
+        public CurdOprationSL(ICurdOprationRL CurdOprationRL)
         {
-            throw new System.NotImplementedException();
+            _curdOprationRL = CurdOprationRL;
+        }
+        public async Task<CreateReacordReasponce> CreateRecord(CreateRecordRequest request)
+        {
+            return await _curdOprationRL.CreateRecord(request);
         }
     }
 }

@@ -2,6 +2,7 @@
 using Curd.ServiceLayer;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Threading.Tasks;
 
 namespace Curd.Controllers
@@ -19,18 +20,21 @@ namespace Curd.Controllers
 
 
         [HttpPost]
+        [Route(template:"CreateRecord ")]
         public async Task<IActionResult> CreateRecord(CreateRecordRequest request)
         {
-
+            CreateReacordReasponce responce = null;
             try
             {
-
+                responce = await _CurdOprationSL.CreateRecord(request);
             }
-            catch
+            catch(Exception ex)
             {
-
+                responce.Issuccess = false;
+                responce.Message = ex.Message;
             }
 
+            return Ok(responce);
                
         }
     }
