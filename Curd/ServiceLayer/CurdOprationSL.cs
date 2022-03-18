@@ -16,6 +16,13 @@ namespace Curd.ServiceLayer
         {
             return await _curdOprationRL.CreateRecord(request);
         }
+
+
+        //Read Opration
+        public async Task<ReadRecord> ReadRecord()
+        {
+            return await _curdOprationRL.ReadRecord();
+        }
     }
 }
  
