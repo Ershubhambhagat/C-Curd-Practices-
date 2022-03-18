@@ -21,33 +21,32 @@ namespace Curd.RepositryLayer
         }
         public async Task<CreateReacordReasponce> CreateRecord(CreateRecordRequest request)
         {
-            CreateReacordReasponce responce=new CreateReacordReasponce();
+            CreateReacordReasponce responce = new CreateReacordReasponce();
             responce.Issuccess = true;
             responce.Message = "Succesfully";
             try
-
             {
-                string sqlquiry= "Insert into CrudOpration (UsrName,Age)value(@UsrName,@Age)";
-                using (SqlCommand sqlCommand =new SqlCommand(sqlquiry , _sqlConnection))
+                string sqlquery = "Insert into CrudOprationTable (UserName,age) values(@UserName,@age)";
+                using (SqlCommand sqlCommand = new SqlCommand(sqlquery, _sqlConnection))
                 {
-                    sqlCommand.CommandType=System.Data.CommandType.Text;
-                    sqlCommand.CommandTimeout=180;
-                    sqlCommand.Parameters.AddWithValue(parameterName: "@UserName", request);
-                    sqlCommand.Parameters.AddWithValue(parameterName: "@Age", request);
+                    sqlCommand.CommandType = System.Data.CommandType.Text;
+                    sqlCommand.CommandTimeout = 180;
+                    sqlCommand.Parameters.AddWithValue(parameterName: "@UserName", request.UserName);
+                    sqlCommand.Parameters.AddWithValue(parameterName: "@age", request.age);
                     _sqlConnection.Open();
-                    int status =await sqlCommand.ExecuteNonQueryAsync();
-                    if(status<=0)
+                    int status = await sqlCommand.ExecuteNonQueryAsync();
+                    if (status <= 0)
                     {
-                        responce.Issuccess=false; ;
+                        responce.Issuccess = false; ;
                         responce.Message = "Something wnt wroonge";
                     }
                 }
 
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                responce.Issuccess=false;
-                responce.Message = ex.Message;  
+                responce.Issuccess = false;
+                responce.Message = ex.Message;
 
             }
             finally

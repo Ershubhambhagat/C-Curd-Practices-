@@ -16,7 +16,6 @@ C:\Users\ershu\Desktop\Jenkins\YT\Curd\Curd\bin\Debug\netcoreapp3.1\runtimes\win
 C:\Users\ershu\Desktop\Jenkins\YT\Curd\Curd\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\sni.dll
 C:\Users\ershu\Desktop\Jenkins\YT\Curd\Curd\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp2.1\System.Data.SqlClient.dll
 C:\Users\ershu\Desktop\Jenkins\YT\Curd\Curd\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
-C:\Users\ershu\Desktop\Jenkins\YT\Curd\Curd\obj\Debug\netcoreapp3.1\Curd.csproj.AssemblyReference.cache
 C:\Users\ershu\Desktop\Jenkins\YT\Curd\Curd\obj\Debug\netcoreapp3.1\Curd.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\ershu\Desktop\Jenkins\YT\Curd\Curd\obj\Debug\netcoreapp3.1\Curd.AssemblyInfoInputs.cache
 C:\Users\ershu\Desktop\Jenkins\YT\Curd\Curd\obj\Debug\netcoreapp3.1\Curd.AssemblyInfo.cs
