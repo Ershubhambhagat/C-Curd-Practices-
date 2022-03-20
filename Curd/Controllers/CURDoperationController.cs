@@ -35,6 +35,11 @@ namespace Curd.Controllers
             }
             return Ok(responce);
         }
+
+
+        //Read Recrord From Here 
+
+
         [HttpGet]
         public  async Task<IActionResult> ReadRecord()
         {

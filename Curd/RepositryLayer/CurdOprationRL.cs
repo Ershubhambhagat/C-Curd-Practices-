@@ -68,7 +68,7 @@ namespace Curd.RepositryLayer
 
             try
             {
-                string SqlQuary ="Select UserName,age from CrudOprationTable;";
+                string SqlQuary ="Select UserName,age from CrudOprationTable";
                 using (SqlCommand sqlCommand = new SqlCommand(SqlQuary, _sqlConnection))
                 {
                     sqlCommand.CommandType=System.Data.CommandType.Text;
