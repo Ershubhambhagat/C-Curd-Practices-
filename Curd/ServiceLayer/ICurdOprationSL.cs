@@ -7,7 +7,10 @@ namespace Curd.ServiceLayer
     {
 
         public Task<CreateReacordReasponce> CreateRecord(CreateRecordRequest request);
-        public Task<ReadRecord> ReadRecord(); 
+        public Task<ReadRecord> ReadRecord();
+        // Update Record
+        public Task<UpdateRecordResponse>updateRecord(UpdateRecordRequest request);
+
     }
 
 }

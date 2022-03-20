@@ -24,6 +24,11 @@ namespace Curd.ServiceLayer
         {
             return await _curdOprationRL.ReadRecord();
         }
+        // Update recode 
+        public async Task<UpdateRecordResponse> updateRecord(UpdateRecordRequest request)
+        {
+            return await _curdOprationRL.updateRecord(request);
+        }
     }
 }
  

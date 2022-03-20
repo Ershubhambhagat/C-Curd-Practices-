@@ -8,5 +8,9 @@ namespace Curd.RepositryLayer
         public Task<CreateReacordReasponce> CreateRecord(CreateRecordRequest request);
         public Task<ReadRecord> ReadRecord();
 
+        //update from here 
+
+       
+        public Task<UpdateRecordResponse> updateRecord(UpdateRecordRequest request);
     }
 }

@@ -41,6 +41,7 @@ namespace Curd.Controllers
 
 
         [HttpGet]
+        [Route(template:"ReadRecord")]
         public  async Task<IActionResult> ReadRecord()
         {
             ReadRecord response=null; 
@@ -55,5 +56,30 @@ namespace Curd.Controllers
             }
             return Ok(response); 
         }
+
+
+        //  for update      
+
+
+        [HttpPut]
+        [Route(template: "UpdateRecord")]
+
+        public async Task<IActionResult> UpdateRecord(UpdateRecordRequest request)
+        {
+            UpdateRecordResponse response = null;
+            try
+            {
+                response = await _CurdOprationSL.updateRecord(request);
+            }
+            catch (Exception ex)
+            {
+
+
+            }
+            return Ok(response);
+        }
+
+        // Delete Api
+
     }
 }

@@ -68,10 +68,10 @@ namespace Curd.RepositryLayer
 
             try
             {
-                string SqlQuary ="Select UserName,age from CrudOprationTable";
+                string SqlQuary = "Select UserName,age from CrudOprationTable";
                 using (SqlCommand sqlCommand = new SqlCommand(SqlQuary, _sqlConnection))
                 {
-                    sqlCommand.CommandType=System.Data.CommandType.Text;
+                    sqlCommand.CommandType = System.Data.CommandType.Text;
                     sqlCommand.CommandTimeout = 180;
                     _sqlConnection.Open();
                     using (SqlDataReader sqlDataReader = await sqlCommand.ExecuteReaderAsync())
@@ -79,25 +79,21 @@ namespace Curd.RepositryLayer
                         if (sqlDataReader.HasRows)
                         {
                             responce.readRecordData = new List<ReadRecordData>();
-                            while(await sqlDataReader.ReadAsync())
+                            while (await sqlDataReader.ReadAsync())
                             {
                                 ReadRecordData dbData = new ReadRecordData();
-                                dbData.UserName = sqlDataReader[name: "UserName"]!=DBNull.Value? sqlDataReader[name: "UserName"].ToString():String.Empty;
-                                dbData.age=sqlDataReader[name: "age"]!=DBNull.Value ?Convert.ToInt32(sqlDataReader[name:"age"]):0;
+                                dbData.UserName = sqlDataReader[name: "UserName"] != DBNull.Value ? sqlDataReader[name: "UserName"].ToString() : String.Empty;
+                                dbData.age = sqlDataReader[name: "age"] != DBNull.Value ? Convert.ToInt32(sqlDataReader[name: "age"]) : 0;
                                 responce.readRecordData.Add(dbData);
-
-
                             }
                         }
                     }
                 }
-
-
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 responce.IsSuccess = false;
-                responce.Message=ex.Message;    
+                responce.Message = ex.Message;
             }
             finally
             {
@@ -105,5 +101,50 @@ namespace Curd.RepositryLayer
             }
             return responce;
         }
+
+
+
+
+        // Update Record _____________Update Record ++++++++++++++++ Update Record +++++++++++
+        public async Task<UpdateRecordResponse> updateRecord(UpdateRecordRequest request)
+
+        {
+            UpdateRecordResponse Response = new UpdateRecordResponse();
+            Response.IsSucess = true;
+            Response.Message = "Suceess";
+
+            try
+            {
+                string sqlQuery = "Update CrudOprationTable set UserName=@UserName,age=@age where Id=@Id";
+
+                using (SqlCommand sqlCommand = new SqlCommand(sqlQuery, _sqlConnection))
+                {
+                    sqlCommand.CommandType = System.Data.CommandType.Text;
+                    sqlCommand.CommandTimeout = 180;
+                    sqlCommand.Parameters.AddWithValue(parameterName: "@UserName", request.UserName);
+                    sqlCommand.Parameters.AddWithValue(parameterName: "@age", request.age);
+                    sqlCommand.Parameters.AddWithValue(parameterName: "@Id", request.Id);
+                    _sqlConnection.Open();
+                    int status = await sqlCommand.ExecuteNonQueryAsync();
+                    if (status <= 0)
+                    {
+                        Response.IsSucess = false;
+                        Response.Message = "something went wrongr";
+                    }
+                }                
+            }
+            catch (Exception e)
+            {
+                Response.IsSucess = false;
+                Response.Message = e.Message;
+            }
+            finally
+            {
+                _sqlConnection.Close();
+            }
+            return Response;
+        }
+
+
     }
 }
