@@ -10,6 +10,7 @@ namespace Curd.ServiceLayer
         public Task<ReadRecord> ReadRecord();
         // Update Record
         public Task<UpdateRecordResponse>updateRecord(UpdateRecordRequest request);
+        public Task<DeleteRecordResponse> DeleteRecord (DeleteRecordRequest request);
 
     }
 

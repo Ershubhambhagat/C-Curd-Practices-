@@ -41,20 +41,20 @@ namespace Curd.Controllers
 
 
         [HttpGet]
-        [Route(template:"ReadRecord")]
-        public  async Task<IActionResult> ReadRecord()
+        [Route(template: "ReadRecord")]
+        public async Task<IActionResult> ReadRecord()
         {
-            ReadRecord response=null; 
+            ReadRecord response = null;
             try
             {
                 response = await _CurdOprationSL.ReadRecord();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-              
 
+                response.Message = ex.Message;
             }
-            return Ok(response); 
+            return Ok(response);
         }
 
 
@@ -74,12 +74,32 @@ namespace Curd.Controllers
             catch (Exception ex)
             {
 
-
+                response.Message = ex.Message;
             }
             return Ok(response);
         }
 
         // Delete Api
+
+        [HttpDelete]
+        [Route(template: "DeleteRecord ")]
+
+        public async Task<IActionResult> DeleteRecord(DeleteRecordRequest request)
+        {
+            DeleteRecordResponse response = null;
+            try
+            {
+                response = await _CurdOprationSL.DeleteRecord(request);
+            }
+            catch (Exception ex)
+            {
+                response.Message = ex.Message;
+                response.IsSucess = false;
+
+
+            }
+            return Ok(response);
+        }
 
     }
 }

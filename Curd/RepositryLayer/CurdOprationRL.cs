@@ -20,6 +20,9 @@ namespace Curd.RepositryLayer
             _configuration = configuration;
             _sqlConnection = new SqlConnection(_configuration[key: "ConnectionStrings:DBSettingConnection"]);
         }
+
+
+        //Create Record ++++++++++++++++++++++++++++++ Create Record+++++++++++++++++++++++Create Record++++++++++++++++++
         public async Task<CreateReacordReasponce> CreateRecord(CreateRecordRequest request)
         {
             CreateReacordReasponce responce = new CreateReacordReasponce();
@@ -57,7 +60,7 @@ namespace Curd.RepositryLayer
             return responce;
         }
 
-
+        
         //Read Record +++++++++++++++++++++++++++++++++Read Record ++++++++++++++++++++++++++++++++++++Read Record +++++++++++++++++
         public async Task<ReadRecord> ReadRecord()
         {
@@ -103,8 +106,6 @@ namespace Curd.RepositryLayer
         }
 
 
-
-
         // Update Record _____________Update Record ++++++++++++++++ Update Record +++++++++++
         public async Task<UpdateRecordResponse> updateRecord(UpdateRecordRequest request)
 
@@ -143,6 +144,48 @@ namespace Curd.RepositryLayer
                 _sqlConnection.Close();
             }
             return Response;
+        }
+
+
+        //Delete +++++++++++++  ++++++++++++++++   Delete +++++++++++++++++++++++ Delete
+        public async Task<DeleteRecordResponse> DeleteRecord(DeleteRecordRequest request)
+        {
+            DeleteRecordResponse responce = new DeleteRecordResponse();
+            responce.IsSucess = true;
+            responce.Message = "Sucessfully";
+
+            try
+            {
+                string sqlQuary = "Delete from CrudOprationTable Where Id=@Id";
+                using(SqlCommand sqlCommand = new SqlCommand(sqlQuary, _sqlConnection))
+                {
+                    sqlCommand.CommandType = System.Data.CommandType.Text;
+                    sqlCommand.CommandTimeout = 180;
+                    _sqlConnection.Open();
+                    sqlCommand.Parameters.AddWithValue(parameterName: "@Id",request.Id);
+
+                    int status=await sqlCommand.ExecuteNonQueryAsync();
+                    if (status <= 0)
+                    { 
+                       responce.IsSucess = false;
+                        responce.Message = "Something went wronge ";
+                    }
+
+                }
+            }
+            catch(Exception e)
+            {
+                responce.IsSucess=false;
+                responce.Message= "Exception Message : "+e.Message;
+
+            }
+            finally
+            {
+                _sqlConnection.Close();
+
+            }
+
+            return responce;
         }
 
 

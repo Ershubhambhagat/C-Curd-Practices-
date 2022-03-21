@@ -15,11 +15,8 @@ namespace Curd.ServiceLayer
         public async Task<CreateReacordReasponce> CreateRecord(CreateRecordRequest request)
         {
             return await _curdOprationRL.CreateRecord(request);
-
-
-            //Read Record Form Here
-
         }
+        //Read Record Form 
         public async Task<ReadRecord> ReadRecord()
         {
             return await _curdOprationRL.ReadRecord();
@@ -28,6 +25,12 @@ namespace Curd.ServiceLayer
         public async Task<UpdateRecordResponse> updateRecord(UpdateRecordRequest request)
         {
             return await _curdOprationRL.updateRecord(request);
+        }
+
+        //Delete Record
+        public async Task<DeleteRecordResponse> DeleteRecord(DeleteRecordRequest request)
+        {
+            return await _curdOprationRL.DeleteRecord(request);
         }
     }
 }
