@@ -6,6 +6,7 @@ namespace Curd.RepositryLayer
     public interface ICurdOprationRL 
     {
         public Task<CreateReacordReasponce> CreateRecord(CreateRecordRequest request);
+        public Task<ReadRecord> ReadRecord();
 
     }
 }
